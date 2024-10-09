@@ -1,0 +1,7 @@
+#+TITLE: Contact
+
+You can reach my email upon evaluating the following Haskell expression:
+
+#+begin_src haskell
+  concat ["web", "@", "lily", ".", "bike"]
+#+end_src

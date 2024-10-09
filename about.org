@@ -1,0 +1,83 @@
+#+Title: About
+
+#+begin_export html
+<article class="columns">
+  <div class="col grow">
+#+end_export
+
+#+begin_export html
+<section>
+#+end_export
+
+** $ whoami
+I'm a self-taught software engineer that's been writing code
+professionally since I was 17. Proficient at nearly everything under
+the sun from APL to Rust to DevOps and cloud infrastructure. Anything
+to web development, infrastructure management, cloud orchestration, or
+combing through spaghetti legacy systems: I am more than capable at tackling.
+#+begin_export html
+</section>
+#+end_export
+
+#+begin_export html
+<section class="board-listing">
+#+end_export
+
+
+#+ATTR_HTML: :class board
+#+CAPTION: Selected programming languages
+| Language   |                      | Level |
+|------------+----------------------+-------|
+| Python     | ■■■■■■■■■■ | 10/10 |
+| Typescript | ■■■■■■■■□□ | 08/10 |
+| Haskell    | ■■■■■■■■■□ | 09/10 |
+| C#         | ■■■■■■■■■■ | 10/10 |
+| Java       | ■■■■■■■■□□ | 08/10 |
+| C          | ■■■■■■■■■□ | 09/10 |
+| C++        | ■■■■■■■■□□ | 08/10 |
+
+#+ATTR_HTML: :class board
+#+CAPTION: Selected front-end technologies
+| Technology |                      | Level |
+|------------+----------------------+-------|
+| HTML/CSS   | ■■■■■■■■■■ | 10/10 |
+| React      | ■■■■■■■■□□ | 08/10 |
+| Angular    | ■■■■■■■■□□ | 08/10 |
+| Svelte     | ■■■■■■□□□□ | 06/10 |
+
+#+ATTR_HTML: :class board
+#+CAPTION: Selected infrastructure tooling
+| Tool       |                      | Level |
+|------------+----------------------+-------|
+| AWS        | ■■■■■■■□□□ | 07/10 |
+| Docker     | ■■■■■■■■■□ | 09/10 |
+| Kubernetes | ■■■■■■□□□□ | 06/10 |
+| Terraform  | ■■■■■■■■□□ | 08/10 |
+| Ansible    | ■■■■■■■□□□ | 07/10 |
+
+#+begin_export html
+</section>
+#+end_export
+
+#+begin_export html
+<section>
+#+end_export
+My personal interests are primarily centered around low level systems
+(kernels/operating systems), compilers, and developer tooling.
+#+begin_export html
+</section>
+#+end_export
+
+#+begin_export html
+</div>
+#+end_export
+
+#+begin_export html
+<section class="col headshot-col">
+<figure>
+ <img class="headshot" src="./images/headshot.jpg" alt="A headshot of me">
+ <figcaption>An avid cyclist and software engineer</figcaption>
+</figure>
+</section>
+</article>
+#+end_export
