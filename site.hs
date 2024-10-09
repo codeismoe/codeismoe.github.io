@@ -6,7 +6,9 @@ import Data.Bifunctor
 import Data.Foldable (foldrM)
 import Data.Functor
 import qualified Data.Map as M
+import Data.Maybe (fromMaybe)
 import qualified Data.Text as T
+import qualified Debug.Trace as Debug
 import Hakyll
 import qualified Network.Wai.Application.Static as Static
 import Text.Pandoc
@@ -14,8 +16,7 @@ import Text.Pandoc.Highlighting (monochrome, styleToCss)
 import qualified Text.Pandoc.UTF8 as T
 import Text.Pandoc.Walk
 import WaiAppStatic.Types (File (fileName), Piece (fromPiece), toPiece)
-import Data.Maybe (fromMaybe)
-import qualified Debug.Trace as Debug
+
 main :: IO ()
 main = hakyllWith (defaultConfiguration {previewSettings = serverSettings, destinationDirectory = "docs/"}) $ do
   match "images/*" $ do
@@ -83,8 +84,9 @@ serverSettings path =
     }
   where
     addHtml [] = [] -- ensure index works still lmao
-    addHtml p = Debug.trace (show p) (let file = fromPiece $ last p in
-      maybe p (\x -> init p <> [x]) (toPiece (if '.' `T.elem` file then file else file <> ".html")))
+    addHtml p =
+      let file = fromPiece $ last p
+       in maybe p (\x -> init p <> [x]) (toPiece (if '.' `T.elem` file then file else file <> ".html"))
     baseSettings = Static.defaultFileServerSettings path
     defaultGetMimeType = Static.ssGetMimeType baseSettings
 
