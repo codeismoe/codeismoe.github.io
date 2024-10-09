@@ -2,19 +2,20 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# OPTIONS_GHC -Wno-deferred-out-of-scope-variables #-}
 
+import Data.Bifunctor
+import Data.Foldable (foldrM)
+import Data.Functor
 import qualified Data.Map as M
 import qualified Data.Text as T
 import Hakyll
+import qualified Network.Wai.Application.Static as Static
 import Text.Pandoc
+import Text.Pandoc.Highlighting (monochrome, styleToCss)
 import qualified Text.Pandoc.UTF8 as T
 import Text.Pandoc.Walk
-import Data.Foldable (foldrM)
-import Data.Functor
-import Data.Bifunctor
-import Text.Pandoc.Highlighting (monochrome, styleToCss)
-import qualified Network.Wai.Application.Static  as Static
-import WaiAppStatic.Types (File(fileName), Piece (fromPiece))
-
+import WaiAppStatic.Types (File (fileName), Piece (fromPiece), toPiece)
+import Data.Maybe (fromMaybe)
+import qualified Debug.Trace as Debug
 main :: IO ()
 main = hakyllWith (defaultConfiguration {previewSettings = serverSettings, destinationDirectory = "docs/"}) $ do
   match "images/*" $ do
@@ -74,8 +75,16 @@ main = hakyllWith (defaultConfiguration {previewSettings = serverSettings, desti
   match "templates/*" $ compile templateBodyCompiler
 
 serverSettings :: FilePath -> Static.StaticSettings
-serverSettings path = baseSettings {Static.ssGetMimeType = getMimeType}
+serverSettings path =
+  baseSettings
+    { Static.ssGetMimeType = getMimeType,
+      -- github wants .html in the files but not in the routes, adjust for this in dev
+      Static.ssLookupFile = Static.ssLookupFile baseSettings . addHtml
+    }
   where
+    addHtml [] = [] -- ensure index works still lmao
+    addHtml p = Debug.trace (show p) (let file = fromPiece $ last p in
+      maybe p (\x -> init p <> [x]) (toPiece (if '.' `T.elem` file then file else file <> ".html")))
     baseSettings = Static.defaultFileServerSettings path
     defaultGetMimeType = Static.ssGetMimeType baseSettings
 
@@ -85,7 +94,7 @@ serverSettings path = baseSettings {Static.ssGetMimeType = getMimeType}
       if T.elem '.' (fromPiece $ fileName file)
         then defaultGetMimeType file
         else return "text/html"
-             
+
 fromPandocMeta :: Meta -> Context String
 fromPandocMeta (Meta m) = Context $ \k _ _ ->
   case M.lookup (T.pack k) m of
@@ -105,9 +114,10 @@ fromPandocMeta (Meta m) = Context $ \k _ _ ->
     Nothing -> fail $ "No '" ++ k ++ "' found in Pandoc Metadata"
 
 postCtx :: Context String
-postCtx = field "url" clean <> 
-          dateField "date" "%B %e, %Y"
-          `mappend` defaultContext
+postCtx =
+  field "url" clean
+    <> dateField "date" "%B %e, %Y"
+      `mappend` defaultContext
   where
     clean item = do
       path <- getRoute (itemIdentifier item)
@@ -116,9 +126,9 @@ postCtx = field "url" clean <>
         Just s -> pure . cleanupIndexUrl . toUrl $ s
 
 cleanupIndexUrl :: String -> String
-cleanupIndexUrl url@('/' : _)  -- only clean up local URLs
-  | Nothing <- prefix = url  -- does not end with index.html
-  | Just s <- prefix = s  -- clean up index.html from URL
+cleanupIndexUrl url@('/' : _) -- only clean up local URLs
+  | Nothing <- prefix = url -- does not end with index.html
+  | Just s <- prefix = s -- clean up index.html from URL
   where
     prefix = needlePrefix "index.html" url
 cleanupIndexUrl url = url
@@ -127,7 +137,7 @@ useMetaPandocCompiler :: Compiler (Context String, Item String)
 useMetaPandocCompiler = do
   body <- getResourceBody
   i@(Item {itemBody = Pandoc m _}) <- readPandoc body
-  return (fromPandocMeta m, writePandocWith (defaultHakyllWriterOptions { writerHighlightStyle = Just myPandocStyle})  i)
+  return (fromPandocMeta m, writePandocWith (defaultHakyllWriterOptions {writerHighlightStyle = Just myPandocStyle}) i)
 
 myPandocStyle = monochrome
 
