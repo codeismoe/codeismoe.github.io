@@ -26,21 +26,21 @@ main = hakyllWith (defaultConfiguration {previewSettings = serverSettings, desti
     compile compressCssCompiler
 
   match (fromList ["about.org", "contact.org"]) $ do
-    route $ setExtension ""
+    route $ setExtension "html"
     compile $ do
       useMetaPandocCompiler
         >>= uncurry (loadAndApplyTemplate "templates/default.html") . first (<> postCtx)
         >>= relativizeUrls
 
   match "posts/*" $ do
-    route $ setExtension ""
+    route $ setExtension "html"
     compile $
       useMetaPandocCompiler
         >>= uncurry (templates ["templates/post.html", "templates/default.html"]) . first (<> postCtx)
         >>= relativizeUrls
 
   create ["archive.html"] $ do
-    route $ setExtension ""
+    route $ setExtension "html"
     compile $ do
       posts <- recentFirst =<< loadAll "posts/*"
       let archiveCtx =
