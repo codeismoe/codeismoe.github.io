@@ -16,7 +16,7 @@ import qualified Network.Wai.Application.Static  as Static
 import WaiAppStatic.Types (File(fileName), Piece (fromPiece))
 
 main :: IO ()
-main = hakyllWith (defaultConfiguration {previewSettings = serverSettings}) $ do
+main = hakyllWith (defaultConfiguration {previewSettings = serverSettings, destinationDirectory = "docs/"}) $ do
   match "images/*" $ do
     route idRoute
     compile copyFileCompiler
@@ -120,7 +120,7 @@ cleanupIndexUrl url@('/' : _)  -- only clean up local URLs
   | Nothing <- prefix = url  -- does not end with index.html
   | Just s <- prefix = s  -- clean up index.html from URL
   where
-    prefix = needxlePrefix "index.html" url
+    prefix = needlePrefix "index.html" url
 cleanupIndexUrl url = url
 
 useMetaPandocCompiler :: Compiler (Context String, Item String)
