@@ -60,6 +60,10 @@ main = hakyllWith (defaultConfiguration {previewSettings = serverSettings, desti
     compile $ do
       makeItem $ styleToCss myPandocStyle
 
+  create ["CNAME"] $ do
+    route idRoute
+    compile $ makeItem ("lily.bike" :: String)
+
   match "index.html" $ do
     route $ idRoute
     compile $ do
