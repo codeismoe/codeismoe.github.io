@@ -34,7 +34,7 @@ main = hakyllWith (defaultConfiguration {previewSettings = serverSettings, desti
         >>= uncurry (loadAndApplyTemplate "templates/default.html") . first (<> postCtx)
         >>= relativizeUrls
 
-  match "posts/*" $ do
+  matchMetadata "posts/*" (maybe False (== "true") . lookupString "publish") $ do
     route $ setExtension "html"
     compile $
       useMetaPandocCompiler
