@@ -1,2 +1,4 @@
 _*
 dist*
+result
+.direnv/*

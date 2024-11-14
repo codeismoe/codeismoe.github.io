@@ -1,8 +1,2 @@
-{ pkgs ? import <nixpkgs> { } }:
-with pkgs;
-mkShell {
-  buildInputs = [
-    # haskellPackages.hakyll
-    zlib
-  ];
-}
+{ pkgs ? import <nixpkgs> }:
+(import ./. {inherit pkgs;}).env
