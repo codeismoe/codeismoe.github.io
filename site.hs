@@ -12,7 +12,7 @@ import qualified Debug.Trace as Debug
 import Hakyll
 import qualified Network.Wai.Application.Static as Static
 import Text.Pandoc
-import Text.Pandoc.Highlighting (monochrome, styleToCss)
+import Text.Pandoc.Highlighting (breezeDark, styleToCss)
 import qualified Text.Pandoc.UTF8 as T
 import Text.Pandoc.Walk
 import WaiAppStatic.Types (File (fileName), Piece (fromPiece), toPiece)
@@ -38,7 +38,7 @@ main = hakyllWith (defaultConfiguration {previewSettings = serverSettings, desti
     route $ setExtension "html"
     compile $
       useMetaPandocCompiler
-        >>= uncurry (templates ["templates/post.html", "templates/default.html"]) . first (<> postCtx)
+        >>= uncurry (templates ["templates/default.html", "templates/post.html"]) . first (<> postCtx)
         >>= relativizeUrls
 
   create ["archive.html"] $ do
@@ -145,7 +145,7 @@ useMetaPandocCompiler = do
   i@(Item {itemBody = Pandoc m _}) <- readPandoc body
   return (fromPandocMeta m, writePandocWith (defaultHakyllWriterOptions {writerHighlightStyle = Just myPandocStyle}) i)
 
-myPandocStyle = monochrome
+myPandocStyle = breezeDark
 
 templates :: [Identifier] -> Context String -> Item String -> Compiler (Item String)
 templates tpls ctx item = foldrM (\tpl comp -> loadAndApplyTemplate tpl ctx comp) item tpls
