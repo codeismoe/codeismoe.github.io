@@ -52,9 +52,8 @@ p {
 
 pre {
     font-family: var(--base-font);
-    display: border-box;
     border: 1px solid var(--fg-emph);
-    backgroundh: #3a3a3a;
+    background: #3a3a3a;
     color: var(--fg-emph);
     padding: var(--snd-rhythm);
     margin-bottom: var(--snd-rhythm);

@@ -27,18 +27,21 @@ combing through spaghetti legacy systems: I am more than capable at tackling.
 <section class="board-listing">
 #+end_export
 
-
 #+ATTR_HTML: :class board
 #+CAPTION: Selected programming languages
 | Language   |                      | Level |
 |------------+----------------------+-------|
-| Python     | ■■■■■■■■■■ | 10/10 |
-| Typescript | ■■■■■■■■□□ | 08/10 |
-| Haskell    | ■■■■■■■■■□ | 09/10 |
+| Bash/Shell | ■■■■■■■■■■ | 10/10 |
 | C#         | ■■■■■■■■■■ | 10/10 |
-| Java       | ■■■■■■■■□□ | 08/10 |
+| Go         | ■■■■■■■■■■ | 10/10 |
+| JavaScript | ■■■■■■■■■■ | 10/10 |
+| Python     | ■■■■■■■■■■ | 10/10 |
+| Typescript | ■■■■■■■■■■ | 10/10 |
 | C          | ■■■■■■■■■□ | 09/10 |
+| Haskell    | ■■■■■■■■■□ | 09/10 |
+| Java       | ■■■■■■■■■□ | 09/10 |
 | C++        | ■■■■■■■■□□ | 08/10 |
+| Rust       | ■■■■■■■□□□ | 07/10 |
 
 #+ATTR_HTML: :class board
 #+CAPTION: Selected front-end technologies
@@ -53,11 +56,24 @@ combing through spaghetti legacy systems: I am more than capable at tackling.
 #+CAPTION: Selected infrastructure tooling
 | Tool       |                      | Level |
 |------------+----------------------+-------|
-| AWS        | ■■■■■■■□□□ | 07/10 |
-| Docker     | ■■■■■■■■■□ | 09/10 |
-| Kubernetes | ■■■■■■□□□□ | 06/10 |
+| Docker     | ■■■■■■■■■■ | 10/10 |
+| SQL        | ■■■■■■■■■■ | 10/10 |
+| Jenkins    | ■■■■■■■■□□ | 08/10 |
+| Redis      | ■■■■■■■■□□ | 08/10 |
 | Terraform  | ■■■■■■■■□□ | 08/10 |
 | Ansible    | ■■■■■■■□□□ | 07/10 |
+| Kubernetes | ■■■■■■□□□□ | 06/10 |
+
+#+ATTR_HTML: :class board
+#+CAPTION: Selected os/cloud systems
+| Systems  |                      | Level |
+| Linux    | ■■■■■■■■■■ | 10/10 |
+| AWS      | ■■■■■■■■□□ | 08/10 |
+| Azure    | ■■■■■■■□□□ | 07/10 |
+| GCP      | ■■■■■■■□□□ | 07/10 |
+| Splunk   | ■■■■■□□□□□ | 05/10 |
+| NewRelic | ■■■■■□□□□□ | 05/10 |
+
 
 #+begin_export html
 </section>

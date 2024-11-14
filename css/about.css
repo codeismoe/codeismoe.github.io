@@ -9,7 +9,7 @@
     .board-listing {
         flex-direction: row;
         flex-wrap: wrap;
-        align-items: stretch;
+        align-items: flex-start;
         justify-content: flex-start;
     }
 }
