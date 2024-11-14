@@ -1,72 +1,19 @@
+:root {
+    --fg-emph: #f5d48d;
+    --fg-terminal: #ffb000;
+    --bg-shadow-1: color-mix(in hsl, currentColor, hsl(none none 10%));
+    --bg-shadow-2: color-mix(in hsl, currentColor, hsl(none none 80%));
+    --std-rhythm: 1.5rem;
+    --snd-rhythm: calc(0.3 * var(--std-rhythm));
+    --base-font: "VT323", "Courier", monospace;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
 
 * {
     margin: 0;
-}
-
-
-:root {
-    --fg-outer: #f5d48d;
-    --fg-terminal: #ffb000;
-    --bg-shadow-1: color-mix(in hsl, currentColor, hsl(none none 10%));
-    --bg-shadow-2: color-mix(in hsl, currentColor, hsl(none none 80%));
-}
-
-html {
-    height: 100%;
-}
-
-body {
-    -webkit-font-smoothing: antialiased;
-    font-family: sans-serif;
-    font-size: 125%;
-    min-height: 100vh;
-    height: 100%;
-    width: 100%;
-}
-
-body {
-    color: var(--fg-terminal);
-    content: " ";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    padding: 1.5rem;
-    width: 100vw;
-    height: 100vh;
-    background-color: #101010;
-}
-
-.terminal {
-    position: relative;
-    font-family: "VT323", "Courier", monospace;
-    background: #2b2b2b;
-    color: #FFB000;
-    height: 100%;
-    border-radius: 1rem;
-    animation: textShadow 1s infinite;
-    overflow: scroll;
-
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .terminal {
-        animation: none;
-        text-shadow: 1px 0 1px var(--bg-shadow-1), -0.02px 0 1px var(--bg-shadow-2), 0 0 3px;
-    }
-}
-.terminal-inner {
-    max-width: 81rem;
-    margin: auto;
-    padding: 1.5rem;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
 }
 
 img, picture, video, canvas, svg {
@@ -86,25 +33,51 @@ p, h1, h2, h3, h4, h5, h6 {
     isolation: isolate;
 }
 
-@keyframes textShadow {
-    0% {
-        text-shadow: 0.2px 0 1px var(--bg-shadow-1), -0.4px 0 1px var(--bg-shadow-2), 0 0 3px;
-    }
-    20% {
-        text-shadow: 1px 0 1px var(--bg-shadow-1), -0.02px 0 1px var(--bg-shadow-2), 0 0 3px;
-    }
-    40% {
-        text-shadow: 0.3px 0 1px var(--bg-shadow-1), -0.4px 0 1px var(--bg-shadow-2), 0 0 3px;
-    }
-    60% {
-        text-shadow: 0.5px 0 1px var(--bg-shadow-1), -0.7px 0 1px var(--bg-shadow-2), 0 0 3px;
-    }
-    80% {
-        text-shadow: 0.1px 0 1px var(--bg-shadow-1), -0.8px 0 1px var(--bg-shadow-2), 0 0 3px;
-    }
-    100% {
-        text-shadow: 0.3px 0 1px var(--bg-shadow-1), -0.07px 0 1px var(--bg-shadow-2), 0 0 3px;
-    }
+html {
+    height: 100%;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    font-family: var(--base-font);
+    font-size: 125%;
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+}
+
+p {
+    padding-bottom: var(--snd-rhythm);
+}
+
+pre {
+    font-family: var(--base-font);
+    display: border-box;
+    border: 1px solid var(--fg-emph);
+    backgroundh: #3a3a3a;
+    color: var(--fg-emph);
+    padding: var(--snd-rhythm);
+    margin-bottom: var(--snd-rhythm);
+}
+
+body {
+    color: var(--fg-terminal);
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: var(--std-rhythm);
+    width: 100vw;
+    height: 100vh;
+    background-color: #101010;
+}
+
+footer {
+    padding: var(--std-rhythm) 0;
+    font-size: 75%;
 }
 
 header {
@@ -120,7 +93,6 @@ header {
     }
 }
 
-
 header > a {
     color: white;
 }
@@ -128,7 +100,6 @@ header > a {
 header a:visited {
     color: white;
 }
-        
 
 a {
     color: white;
@@ -159,7 +130,6 @@ section {
     width: 100%;
 }
 
-
 .headshot-col {
     max-width: 250px;
     margin: auto;
@@ -183,12 +153,10 @@ section {
     }
 }
 
-
 .center {
     display: flex;
     align-items: center;
     flex-direction: column;
-
 }
 
 main {
@@ -196,67 +164,56 @@ main {
 }
 
 section {
-    padding-top: 1.5rem;
+    padding-top: var(--std-rhythm);
 }
 
-.board-listing {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
+
+/* Create the terminal look */
+.terminal {
+    position: relative;
+    background: #2b2b2b;
+    color: #FFB000;
+    height: 100%;
+    border-radius: 1rem;
+    animation: textShadow 1s infinite;
+    overflow: scroll;
 }
 
-@media(min-width: 80rem) {
-    .board-listing {
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: stretch;
-        justify-content: flex-start;
+/* Disable animation for people that don't want 'em */
+@media (prefers-reduced-motion: reduce) {
+    .terminal {
+        animation: none;
+        /* still keep some minlam text shadow since it improves visibility. */
+        text-shadow: 1px 0 1px var(--bg-shadow-1), -0.02px 0 1px var(--bg-shadow-2), 0 0 3px;
     }
 }
 
-.board {
-    min-width: 16rem;
+.terminal-inner {
+    max-width: 81rem;
+    margin: auto;
+    padding: var(--std-rhythm);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-.board tr:first-child {
-    border-top: none;
-}
-
-.board caption {
-    color: var(--fg-outer);
-}
-              
-.board th {
-    color: var(--fg-outer);
-}
-
-.board th:nth-child(1) {
-    text-align: left;
-}
-
-.board th:nth-child(2) {
-    text-align: center;
-}
-
-.board th:nth-child(3) {
-    text-align: right;
-}
-
-.board td:nth-child(1) {
-    text-align: left;
-}
-
-.board td:nth-child(2){
-    text-align: center;
-}
-
-.board td:nth-child(3){
-    text-align: right;
-}
-
-footer {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-    font-size: 75%;
+@keyframes textShadow {
+    0% {
+        text-shadow: 0.2px 0 1px var(--bg-shadow-1), -0.4px 0 1px var(--bg-shadow-2), 0 0 3px;
+    }
+    20% {
+        text-shadow: 1px 0 1px var(--bg-shadow-1), -0.02px 0 1px var(--bg-shadow-2), 0 0 3px;
+    }
+    40% {
+        text-shadow: 0.3px 0 1px var(--bg-shadow-1), -0.4px 0 1px var(--bg-shadow-2), 0 0 3px;
+    }
+    60% {
+        text-shadow: 0.5px 0 1px var(--bg-shadow-1), -0.7px 0 1px var(--bg-shadow-2), 0 0 3px;
+    }
+    80% {
+        text-shadow: 0.1px 0 1px var(--bg-shadow-1), -0.8px 0 1px var(--bg-shadow-2), 0 0 3px;
+    }
+    100% {
+        text-shadow: 0.3px 0 1px var(--bg-shadow-1), -0.07px 0 1px var(--bg-shadow-2), 0 0 3px;
+    }
 }
